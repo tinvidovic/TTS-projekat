@@ -1,0 +1,121 @@
+<resources>
+    <string name="app_name">Zavrsni Rad</string>
+    <string name="add_remove_activity_name">Dodaj simbole</string>
+    <string name="edit_symbol_activity_name">Uredi simbole</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Postavke</string>
+    <string name="action_share">Podijeli konfiguraciju</string>
+    <string name="kliknite_na_simbol">Kliknite na simbol</string>
+    <string name="title_activity_add_remove_symbols">AddRemoveSymbolsActivity</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="bluetoothActivity_text">U slučaju da se prvi put povezujete sa željenim uređajem, pritisnite Budi Vidljiv kako bi Vas mogao pronaći. Kako biste podjelili konfiguraciju potrebno je da pronađete željeni uređaj u listi pronađenih uređaja i odaberete ga. Nakon toga pritisnite Pošalji Konfiguraciju.</string>
+    <!-- Strings related to Settings -->
+
+    <!--General settings -->
+    <string name="pref_header_general">Opće postavke</string>
+
+    <string-array name="pref_list_symbol_image_size_entries">
+        <item>1000x1000</item>
+        <item>750x750</item>
+        <item>500x500</item>
+        <item>350x350</item>
+        <item>250x250</item>
+        <item>150x150</item>
+        <item>100x100</item>
+        <item>50x50</item>
+    </string-array>
+
+    <string-array name="pref_list_symbol_image_size_values">
+        <item>-3</item>
+        <item>-2</item>
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string name="pref_title_list_symbol_image_size">Velicina Simbola</string>
+
+    <string name="pref_dialog_title_list_symbol_image_size">Odaberite velicinu simbola</string>
+
+    <string name="pref_title_admin_mode">Administratorski režim rada</string>
+
+    <string name="pref_summary_admin_mode">Pristup administratorskim opcijama</string>
+
+    <string name="pref_dialog_title_button_size">Odaberite veličinu dugmadi</string>
+
+    <string name="pref_title_list_text_to_speech_delay_time">Vrijeme čekanja</string>
+
+    <string-array name="pref_list_button_size_entries">
+        <item>Veoma Velika</item>
+        <item>Velika</item>
+        <item>Srednja</item>
+        <item>Mala</item>
+    </string-array>
+
+    <string-array name="pref_list_button_size_values">
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string name="pref_title_button_size">Veličina dugmadi</string>
+
+    <!-- General settings -->
+
+
+    <!-- TextToSpeech Settings -->
+    <string name="pref_header_textToSpeech">TextToSpeech</string>
+
+    <string-array name="pref_list_text_to_speech_entries">
+        <item>Izgovor nakon unosa simbola</item>
+        <item>Izgovor nakon vremenskog perioda</item>
+        <item>Izgovor nakon pritiska na dugme</item>
+    </string-array>
+
+    <string-array name="pref_list_text_to_speech_values">
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string name="pref_title_list_text_to_speech">Text to speech</string>
+
+    <string name="pref_dialog_title_list_text_to_speech">Odaberite text to speech postavke</string>
+
+    <string-array name="pref_list_text_to_speech_delay_time_entries">
+        <item>0.5 sekundi</item>
+        <item>1 sekunda</item>
+        <item>2 sekunde</item>
+        <item>5 sekundi</item>
+    </string-array>
+
+    <string-array name="pref_list_text_to_speech_delay_time_values">
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+
+    <string name="pref_dialog_title_list_text_to_speech_delay_time">Odaberite vrijeme čekanja prije izgovora</string>
+    <string name="action_help">Pomoć</string>
+    <string name="pomoc_tekst">Meni se nalazi u gornjem desnom uglu početnog prikaza. Odaberite postavke za promjenu postavki. Ukoliko ste u postavkama odabrali administratorski režim rada simbole možete dodavati pritiskom na dugme u donjem
+        desnom uglu početnog prikaza dok simbole možete uređivati te uklanjati dugim pritiskom na jedan od simbola u listi. Odaberite podjeli konfiguraciju kako biste podjelili već postojeću konfiguraciju simbola
+    sa jednog uređaja na drugi.</string>
+
+    <string name="dialog_message">Želite li prihvatiti konfiguraciju?</string>
+    <string name="dialog_title">Podjela konfiguracije</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+</resources>
