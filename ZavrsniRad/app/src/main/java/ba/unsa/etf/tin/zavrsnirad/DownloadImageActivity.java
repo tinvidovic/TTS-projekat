@@ -29,6 +29,7 @@ public class DownloadImageActivity extends AppCompatActivity {
     private EditText mEditTextTekst;
     private ArrayList<Symbol> mAllSymbols;
     private Boolean mDaLiJeDohvaćanjeNedostajućih;
+    private String mImeNedostajucegSimbola;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,19 +86,25 @@ public class DownloadImageActivity extends AppCompatActivity {
                         if(!mAllSymbols.get(index).getImageURL().equals(""))
                         {
 
-                            Toast.makeText( getApplicationContext() , mAllSymbols.get(index).getImageURL()  , Toast.LENGTH_SHORT).show();
-                            try
-                            {
-                                FileInputStream fis = new FileInputStream (new File(mAllSymbols.get(index).getImagePath()));
 
 
-                            }catch (FileNotFoundException e)
+                            if(!mAllSymbols.get(index).getImageURL().equals(""))
                             {
-                                mDaLiJeDohvaćanjeNedostajućih = true;
-                                new DownloadImage().execute(mAllSymbols.get(index).getImageURL());
-                                Toast.makeText( getApplicationContext() , "Simbol " + mAllSymbols.get(index).getName() + " učitan!" , Toast.LENGTH_LONG).show();
-                                e.printStackTrace();
+                                try
+                                {
+                                    FileInputStream fis = new FileInputStream (new File(mAllSymbols.get(index).getImagePath()));
+
+
+                                }catch (FileNotFoundException e)
+                                {
+                                    mDaLiJeDohvaćanjeNedostajućih = true;
+                                    mImeNedostajucegSimbola = mAllSymbols.get(index).getName();
+                                    new DownloadImage().execute(mAllSymbols.get(index).getImageURL());
+
+                                    e.printStackTrace();
+                                }
                             }
+
                         }
 
                     }
@@ -161,7 +168,9 @@ public class DownloadImageActivity extends AppCompatActivity {
             {
                 if(result != null)
                 {
-                    saveImage(getApplicationContext(), result, mEditTextIme.getText().toString() + ".jpeg");
+                    saveImage(getApplicationContext(), result, mImeNedostajucegSimbola + ".jpeg");
+
+                    Toast.makeText( getApplicationContext() , "Simbol " + mImeNedostajucegSimbola + " učitan!" , Toast.LENGTH_LONG).show();
 
                 }
                 else
@@ -172,26 +181,28 @@ public class DownloadImageActivity extends AppCompatActivity {
             else
             {
                 File file = getApplicationContext().getFileStreamPath(mEditTextIme.getText().toString()+".jpeg");
+
+                final DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+
+                String imageFullPath = file.getAbsolutePath();
+
+                imageFullPath = file.getPath();
+
+                Log.d(TAG, imageFullPath);
+
+                Symbol noviSimbol = new Symbol(mEditTextIme.getText().toString(), mEditTextTekst.getText().toString(), imageFullPath, mEditTextURL.getText().toString());
+
                 if (file.exists())
                 {
                     Toast.makeText( getApplicationContext() , "Simbol sa ovim nazivom već postoji!" , Toast.LENGTH_LONG).show();
-                }
-                else
-                {
 
-                    if(result != null)
+                    db.deleteSymbol(noviSimbol);
+                }
+
+
+                if(result != null)
                     {
                         saveImage(getApplicationContext(), result, mEditTextIme.getText().toString() + ".jpeg");
-
-                        final DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-
-                        String imageFullPath = file.getAbsolutePath();
-
-                        imageFullPath = file.getPath();
-
-                        Log.d(TAG, imageFullPath);
-
-                        Symbol noviSimbol = new Symbol(mEditTextIme.getText().toString(), mEditTextTekst.getText().toString(), imageFullPath, mEditTextURL.getText().toString());
 
                         db.createSymbol(noviSimbol);
 
@@ -204,7 +215,7 @@ public class DownloadImageActivity extends AppCompatActivity {
                         Toast.makeText( getApplicationContext() , "Neuspješno učitavanje slike!" , Toast.LENGTH_LONG).show();
                     }
 
-                }
+
             }
 
             mDaLiJeDohvaćanjeNedostajućih = false;

@@ -103,6 +103,12 @@ public class EditSymbolActivity extends AppCompatActivity {
         });
 
 
+        imageSymbolImage.requestLayout();
+
+        imageSymbolImage.getLayoutParams().height = 200;
+
+        imageSymbolImage.getLayoutParams().width = 200;
+
     }
 
     private void readDisplayStateValues() {

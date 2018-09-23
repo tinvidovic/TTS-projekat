@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Set;
@@ -237,7 +241,16 @@ public class ShareSettingsActivity extends AppCompatActivity {
         for(int index = 0; index < mSymbols.size(); index++)
         {
 
-            Configuration += mSymbols.get(index).getName() + Constants.SEPERATOR2 + mSymbols.get(index).getImageURL() + Constants.SEPERATOR2 + mSymbols.get(index).getImagePath() + Constants.SEPERATOR2 + mSymbols.get(index).getText() + Constants.SEPERATOR2;
+            if(mSymbols.get(index).getImageURL().equals(""))
+            {
+                Configuration += mSymbols.get(index).getName() + Constants.SEPERATOR2 + "Error: 404" + Constants.SEPERATOR2 + mSymbols.get(index).getImagePath() + Constants.SEPERATOR2 + mSymbols.get(index).getText() + Constants.SEPERATOR2;
+
+            }
+            else
+            {
+                Configuration += mSymbols.get(index).getName() + Constants.SEPERATOR2 + mSymbols.get(index).getImageURL() + Constants.SEPERATOR2 + mSymbols.get(index).getImagePath() + Constants.SEPERATOR2 + mSymbols.get(index).getText() + Constants.SEPERATOR2;
+
+            }
 
             if(mSymbols.get(index).getIsSelectedTab1())
             {
@@ -269,20 +282,40 @@ public class ShareSettingsActivity extends AppCompatActivity {
     {
 
 
-        String[] tmp = Configuration.split(Constants.SEPERATOR);
+
 
         DatabaseHelper db = new DatabaseHelper(mContext);
+
+        ArrayList<Symbol> allSymbols = db.getSymbols();
+        for(int i = 0; i < allSymbols.size(); i++)
+        {
+
+            db.deleteSymbol(allSymbols.get(i));
+
+        }
+
+        String[] tmp = Configuration.split(Constants.SEPERATOR);
 
         for(int index = 0; index < tmp.length; index++)
         {
             String[] tmp2 = tmp[index].split(Constants.SEPERATOR2);
+            Log.d("tmp[index]",tmp[index]);
             Symbol symbol = null;
-            for(int index2 = 0; index2 < tmp2.length; index2++)
+
+            if(tmp2[1].equals("Error: 404"))
             {
-                symbol = new Symbol(tmp2[0], tmp2[3], tmp2[2], tmp[1]);
-                db.deleteSymbol(symbol);
-                db.createSymbol(symbol);
+                symbol = new Symbol(tmp2[0], tmp2[3], tmp2[2], "");
             }
+            else
+            {
+                symbol = new Symbol(tmp2[0], tmp2[3], tmp2[2], tmp2[1]);
+            }
+
+            Log.d("TAG", symbol.getImageURL());
+
+            db.deleteSymbol(symbol);
+            db.createSymbol(symbol);
+
 
             if(tmp[index].contains(Constants.IS_SELECTED_FLAG) && tmp[index].contains("TAB1"))
             {

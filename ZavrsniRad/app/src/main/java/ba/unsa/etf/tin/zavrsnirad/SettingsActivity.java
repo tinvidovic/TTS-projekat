@@ -231,6 +231,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
             if(isXLargeTablet(this)) {
                 finish();
+            }else
+            {
+                finish();
             }
 
         }
