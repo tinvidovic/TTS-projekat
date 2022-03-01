@@ -1,2 +1,2 @@
-# TTS-projekat
-Razvoj aplikacije, TTS engine-a te hardwareske tastature, kao pomoć osobama sa invaliditetom
+# TTS-project
+Android application, TTS engin and a bluetooth connected hardware keyboard, to help with learning in children with speech impairments
